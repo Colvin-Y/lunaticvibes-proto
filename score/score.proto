@@ -4,9 +4,11 @@ package score;
 
 option go_package=".;proto";
 import "google/api/annotations.proto";
+import "validate/validate.proto";
 
 message ScoreData {
-    string userID = 1;
+    string userID = 1[(validate.rules).string.min_len = 5, (validate.rules).string.max_len = 10];
+    //string userID = 1;
     string isCourse = 2;
     string songHash = 3;
     string courseHash = 4;
