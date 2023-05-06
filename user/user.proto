@@ -1,0 +1,54 @@
+syntax = "proto3";
+
+package user;
+
+option go_package=".;proto";
+import "google/api/annotations.proto";
+import "validate/validate.proto";
+
+message UserSignUpData{
+    string userName = 1;
+    string userNickname = 2;
+    string userEmail = 3;
+    string userPwd = 4;
+}
+
+message UserLoginData{
+    string userName = 1;
+    string userPwd = 2;
+}
+
+service UserSignUp{
+    rpc UserSignUp (UserSignUpRequest) returns (UserSignUpReply){
+        option (google.api.http) = {
+            post: "/v1/user/signup"
+            body: "*"
+          };
+    }
+}
+
+message UserSignUpRequest{
+    UserSignUpData data = 1;
+}
+
+message UserSignUpReply{
+    string message = 1;
+}
+
+service UserLogin{
+   rpc UserLogin (UserLoginRequest) returns (UserLoginReply){
+        option (google.api.http) = {
+            post: "/v1/user/login"
+            body: "*"
+        };
+} 
+}
+
+message UserLoginRequest{
+    UserLoginData data = 1;
+}
+
+message UserLoginReply{
+    string userUUID = 1;
+    string message = 2;
+}

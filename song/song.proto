@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package song;
+
+option go_package=".;proto";
+import "google/api/annotations.proto";
+import "validate/validate.proto";
+
+message SongData{
+    string songHash = 1;
+    string songName = 2;
+    string songArtist = 3;
+    string songGenre = 4;
+    string maxBPM = 5;
+    string minBPM = 6;
+    string songTotal = 7;
+    string totalNotes = 8;
+    string songLevel = 9;
+    string keys = 10;
+    string judgeRank = 11;
+}
+
+service InsertSongData {
+    rpc InsertSongData (InsertSongDataRequest) returns (InsertSongDataReply) {
+      option (google.api.http) = {
+        post: "/v1/song/insert"
+        body: "*"
+      };
+    }
+  }
+
+message InsertSongDataRequest {
+    SongData data = 1;
+}
+  
+message InsertSongDataReply {
+    string message = 1;
+}

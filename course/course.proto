@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package course;
+
+option go_package=".;proto";
+import "google/api/annotations.proto";
+import "validate/validate.proto";
+
+message CourseData{
+    string courseHash = 1;
+    string couseSongHash = 2;
+    string courseKeys = 3;
+}
+
+service InsertCourseData {
+    rpc InsertCourseData (InsertCourseDataRequest) returns (InsertCourseDataReply) {
+      option (google.api.http) = {
+        post: "/v1/course/insert"
+        body: "*"
+      };
+    }
+  }
+
+message InsertCourseDataRequest {
+    CourseData data = 1;
+}
+  
+message InsertCourseDataReply {
+    string message = 1;
+}
