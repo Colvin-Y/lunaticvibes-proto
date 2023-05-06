@@ -50,5 +50,6 @@ message UserLoginRequest{
 
 message UserLoginReply{
     string userUUID = 1;
-    string message = 2;
+    string userID = 2;
+    string message = 3;
 }

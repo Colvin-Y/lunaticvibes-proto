@@ -8,7 +8,7 @@ import "validate/validate.proto";
 
 message CourseData{
     string courseHash = 1;
-    string couseSongHash = 2;
+    string courseSongHash = 2;
     string courseKeys = 3;
 }
 

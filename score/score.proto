@@ -8,7 +8,6 @@ import "validate/validate.proto";
 
 message ScoreData {
     string userID = 1[(validate.rules).string.min_len = 5, (validate.rules).string.max_len = 10];
-    //string userID = 1;
     string isCourse = 2;
     string songHash = 3;
     string courseHash = 4;
@@ -29,6 +28,7 @@ message ScoreData {
     string inputType = 19;
     string updateTime = 20;
     string replayFileData = 21;
+    string userUUID = 22;
   }
 
 service InsertScore {
