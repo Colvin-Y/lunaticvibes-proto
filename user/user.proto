@@ -18,12 +18,18 @@ message UserLoginData{
     string userPwd = 2;
 }
 
-service UserSignUp{
+service User{
     rpc UserSignUp (UserSignUpRequest) returns (UserSignUpReply){
         option (google.api.http) = {
             post: "/v1/user/signup"
             body: "*"
           };
+    }
+    rpc UserLogin (UserLoginRequest) returns (UserLoginReply){
+        option (google.api.http) = {
+            post: "/v1/user/login"
+            body: "*"
+        };
     }
 }
 
@@ -33,15 +39,7 @@ message UserSignUpRequest{
 
 message UserSignUpReply{
     string message = 1;
-}
-
-service UserLogin{
-   rpc UserLogin (UserLoginRequest) returns (UserLoginReply){
-        option (google.api.http) = {
-            post: "/v1/user/login"
-            body: "*"
-        };
-} 
+    string RETCODE = 2;
 }
 
 message UserLoginRequest{
@@ -50,6 +48,6 @@ message UserLoginRequest{
 
 message UserLoginReply{
     string userUUID = 1;
-    string userID = 2;
-    string message = 3;
+    string message = 2;
+    string RETCODE = 3;
 }

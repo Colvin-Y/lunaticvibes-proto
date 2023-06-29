@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package user;
+
+option go_package=".;proto";
+import "google/api/annotations.proto";
+import "validate/validate.proto";
+
+message GetChallengerData{
+    string targetUserUUID = 1;
+}
+
+service Challenger{
+    rpc GetChallenger (GetChallengerRequest) returns (GetChallengerReply){
+            option (google.api.http) = {
+                get: "/v1/user/challenger/get"
+              };
+    }
+}
+
+message GetChallengerRequest{
+    GetChallengerData data = 1;
+}
+
+message GetChallengerReply{
+    string challengerList = 1;
+    string RETCODE = 2;
+}

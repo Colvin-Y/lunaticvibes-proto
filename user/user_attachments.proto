@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package user;
+
+option go_package=".;proto";
+import "google/api/annotations.proto";
+import "validate/validate.proto";
+
+message UserAttachments{
+    string userUUID = 1;
+    string userClass1 = 2;
+    string userClass2 = 3;
+    string userClass3 = 4;
+    string userClass4 = 5;
+    string userClass5 = 6;
+    string userClass6 = 7;
+    string userProfile = 8;
+    string userPrivacyLevel = 9;
+}

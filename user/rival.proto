@@ -1,0 +1,88 @@
+syntax = "proto3";
+
+package user;
+
+option go_package=".;proto";
+import "google/api/annotations.proto";
+import "validate/validate.proto";
+
+message AddRivalData{
+    string userUUID = 1;
+    string targetUserUUID = 2;
+}
+
+message DeleteRivalData{
+    string userUUID = 1;
+    string targetUserUUID = 2;
+}
+
+message GetRivalData{
+    string targetUserUUID = 1;
+}
+
+message GetRivalScoreData{
+    string userUUID = 1;
+}
+
+service Rival{
+    rpc AddRival (AddRivalRequest) returns (AddRivalReply){
+        option (google.api.http) = {
+            patch: "/v1/user/rival/add"
+            body:"*"
+          };
+    }
+
+    rpc DeleteRival (DeleteRivalRequest) returns (DeleteRivalReply){
+        option (google.api.http) = {
+            delete : "/v1/user/rival/delete"
+        };
+    }
+
+    rpc GetRival (GetRivalRequest) returns (GetRivalReply) {
+        option (google.api.http) = {
+            get: "/v1/user/rival/get"
+          };
+    }
+
+    rpc GetRivalScore (GetRivalScoreRequest) returns (GetRivalScoreReply){
+        option (google.api.http) = {
+            get: "/v1/user/rival/get_score"
+          };
+    } 
+}
+
+message AddRivalRequest{
+    AddRivalData data = 1;
+}
+
+message DeleteRivalRequest{
+    DeleteRivalData data = 1;
+}
+
+message GetRivalRequest{
+    GetRivalData data = 1;
+}
+
+message GetRivalScoreRequest{
+    GetRivalScoreData data = 1;
+}
+
+message AddRivalReply{
+    string message = 1;
+    string RETCODE = 2;
+}
+
+message DeleteRivalReply{
+    string message = 1;
+    string RETCODE = 2;
+}
+
+message GetRivalReply{
+    string RivalList = 1;
+    string RETCODE = 2;
+}
+
+message GetRivalScoreReply{
+    string RivalScore = 1;//json
+    string RETCODE = 2;
+}

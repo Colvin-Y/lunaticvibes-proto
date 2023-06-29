@@ -7,7 +7,7 @@ import "google/api/annotations.proto";
 import "validate/validate.proto";
 
 message ScoreData {
-    string userID = 1[(validate.rules).string.min_len = 5, (validate.rules).string.max_len = 10];
+    string userUUID = 1;
     string isCourse = 2;
     string songHash = 3;
     string courseHash = 4;
@@ -23,15 +23,16 @@ message ScoreData {
     string scoreBD = 14;
     string scorePR = 15;
     string combo = 16;
-    string laneOp = 17;
-    string gaugeOp = 18;
-    string inputType = 19;
-    string updateTime = 20;
-    string replayFileData = 21;
-    string userUUID = 22;
+    string comboMax = 17;
+    string laneOp = 18;
+    string gaugeOp = 19;
+    string inputType = 20;
+    string updateTime = 21;
+    string replayFileData = 22;
+    string clientVersion = 23;
   }
 
-service InsertScore {
+service Score {
   rpc InsertScore (InsertScoreRequest) returns (InsertScoreReply) {
     option (google.api.http) = {
       post: "/v1/score/insert"
@@ -46,4 +47,5 @@ message InsertScoreRequest {
 
 message InsertScoreReply {
   string message = 1;
+  string RETCODE = 2;
 }

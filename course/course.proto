@@ -12,7 +12,7 @@ message CourseData{
     string courseKeys = 3;
 }
 
-service InsertCourseData {
+service Course {
     rpc InsertCourseData (InsertCourseDataRequest) returns (InsertCourseDataReply) {
       option (google.api.http) = {
         post: "/v1/course/insert"
@@ -27,4 +27,5 @@ message InsertCourseDataRequest {
   
 message InsertCourseDataReply {
     string message = 1;
+    string RETCODE = 2;
 }

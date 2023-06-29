@@ -20,7 +20,7 @@ message SongData{
     string judgeRank = 11;
 }
 
-service InsertSongData {
+service Song {
     rpc InsertSongData (InsertSongDataRequest) returns (InsertSongDataReply) {
       option (google.api.http) = {
         post: "/v1/song/insert"
@@ -35,4 +35,5 @@ message InsertSongDataRequest {
   
 message InsertSongDataReply {
     string message = 1;
+    string RETCODE = 2;
 }
