@@ -19,6 +19,12 @@ service Course {
         body: "*"
       };
     }
+    rpc GetCourseData (GetCourseDataRequest) returns (GetCourseDataReply){
+      option (google.api.http) = {
+        post: "/v1/course/get"
+        body: "*"
+      };
+    }
   }
 
 message InsertCourseDataRequest {
@@ -28,4 +34,13 @@ message InsertCourseDataRequest {
 message InsertCourseDataReply {
     string message = 1;
     string RETCODE = 2;
+}
+message GetCourseDataRequest{
+    string courseHash = 1;
+}
+
+message GetCourseDataReply{
+    CourseData data = 1;
+    string message = 2;
+    string RETCODE = 3;
 }

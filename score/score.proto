@@ -39,6 +39,13 @@ service Score {
       body: "*"
     };
   }
+
+  rpc DeleteScore (DeleteScoreRequest) returns (DeleteScoreReply){
+    option (google.api.http) = {
+      post: "/v1/score/delete"
+      body: "*"
+    };
+  }
 }
 
 message InsertScoreRequest {
@@ -46,6 +53,16 @@ message InsertScoreRequest {
 }
 
 message InsertScoreReply {
+  string message = 1;
+  string RETCODE = 2;
+}
+
+message DeleteScoreRequest{
+  string SongHash = 1;
+  string userUUID = 2;
+}
+
+message DeleteScoreReply{
   string message = 1;
   string RETCODE = 2;
 }

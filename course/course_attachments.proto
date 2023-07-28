@@ -11,3 +11,36 @@ message CourseAttachments{
     string courseSymbol = 2;
     string courseTag = 3;
 }
+
+service Course{
+    rpc UpdateCourseAttachments (UpdateCourseAttachmentsRequest) returns (UpdateCourseAttachmentsReply) {
+        option (google.api.http) = {
+          post: "/v1/course/update_attachments"
+          body: "*"
+    };
+    }
+    rpc GetCourseAttachments (GetCourseAttachmentsRequest) returns (GetCourseAttachmentsReply) {
+        option (google.api.http) = {
+          post: "/v1/course/get_attachments"
+          body: "*"
+    };
+
+}
+}
+
+message UpdateCourseAttachmentsRequest{
+    
+}
+
+message UpdateCourseAttachmentsReply{
+
+}
+
+message GetCourseAttachmentsRequest{
+
+}
+
+message GetCourseAttachmentsReply{
+
+}
+

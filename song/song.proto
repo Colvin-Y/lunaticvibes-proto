@@ -5,6 +5,7 @@ package song;
 option go_package=".;proto";
 import "google/api/annotations.proto";
 import "validate/validate.proto";
+import "../score/socre.proto";
 
 message SongData{
     string songHash = 1;
@@ -27,6 +28,34 @@ service Song {
         body: "*"
       };
     }
+
+    rpc GetSongData (GetSongDataRequest) returns (GetSongDataReply) {
+      option (google.api.http) = {
+        get: "/v1/song/get_data"
+        body: "*"
+      };
+    }
+
+    rpc GetSongRankClient (GetSongRankClientRequest) returns (GetSongRankClientReply) { 
+      option (google.api.http) = {
+        get: "/v1/song/get_rank_client"
+        body: "*"
+      };
+    }
+
+    rpc GetSongScoreData (GetSongScoreDataRequest) returns (GetSongScoreDataReply){
+      option (google.api.http) = {
+        get: "/v1/song/get_score"
+        body: "*"
+      };
+    }
+
+    rpc GetSongRankList (GetSongRankListRequest) returns (GetSongRankListReply){
+      option (google.api.http) = {
+        get: "/v1/song/get_rank_list"
+        body: "*"
+      };
+    }
   }
 
 message InsertSongDataRequest {
@@ -36,4 +65,35 @@ message InsertSongDataRequest {
 message InsertSongDataReply {
     string message = 1;
     string RETCODE = 2;
+}
+
+message GetSongDataRequest{
+  string songHash = 1;
+  optional string userUUID = 2;
+}
+
+message GetSongDataReply{
+  SongData data = 1;
+}
+
+message GetSongRankClient{
+  string songHash = 1;
+  string userUUID = 2;
+}
+message GetSongRankClientReply{
+  int32 userRank = 1;
+  string message = 2;
+  string RETCODE = 3;
+}
+
+message GetSongScoreDataRequest {
+  string SongHash = 1;
+  string userUUID = 2;
+}
+
+message GetSongScoreDataReply{
+  int32 totalPlayer = 1;
+  repeated ScoreData data = 2;
+  string message = 2;
+  string RETCODE = 3;
 }
