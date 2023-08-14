@@ -6,86 +6,86 @@ option go_package=".;proto";
 import "google/api/annotations.proto";
 import "validate/validate.proto";
 
-message addRivalData{
+message AddRivalData{
     string userUUID = 1;
     string targetUserUUID = 2;
 }
 
-message deleteRivalData{
+message DeleteRivalData{
     string userUUID = 1;
     string targetUserUUID = 2;
 }
 
-message getRivalData{
+message GetRivalData{
     string targetUserUUID = 1;
 }
 
-message getRivalScoreDBData{
+message GetRivalScoreDBData{
     string userUUID = 1;
 }
 
 service Rival{
-    rpc AddRival (addRivalRequest) returns (addRivalReply){
+    rpc AddRival (AddRivalRequest) returns (AddRivalReply){
         option (google.api.http) = {
             patch: "/v1/user/rival/add"
             body:"*"
           };
     }
 
-    rpc DeleteRival (deleteRivalRequest) returns (deleteRivalReply){
+    rpc DeleteRival (DeleteRivalRequest) returns (DeleteRivalReply){
         option (google.api.http) = {
             delete : "/v1/user/rival/delete"
         };
     }
 
-    rpc GetRival (getRivalRequest) returns (getRivalReply) {
+    rpc GetRival (GetRivalRequest) returns (GetRivalReply) {
         option (google.api.http) = {
             get: "/v1/user/rival/get"
           };
     }
 
-    rpc GetRivalScoreDB (getRivalScoreDBRequest) returns (getRivalScoreDBReply){
+    rpc GetRivalScoreDB (GetRivalScoreDBRequest) returns (GetRivalScoreDBReply){
         option (google.api.http) = {
             get: "/v1/user/rival/get_score"
           };
     } 
 }
 
-message addRivalRequest{
-    addRivalData data = 1;
+message AddRivalRequest{
+    AddRivalData data = 1;
     string token = 2;
 }
 
-message deleteRivalRequest{
-    deleteRivalData data = 1;
+message DeleteRivalRequest{
+    DeleteRivalData data = 1;
     string token = 2;
 }
 
-message getRivalRequest{
-    getRivalData data = 1;
+message GetRivalRequest{
+    GetRivalData data = 1;
 }
 
-message getRivalScoreDBRequest{
-    getRivalScoreData data = 1;
+message GetRivalScoreDBRequest{
+    GetRivalScoreData data = 1;
     string token = 2;
 }
 
-message addRivalReply{
+message AddRivalReply{
     string message = 1;
     string retCode = 2;
 }
 
-message deleteRivalReply{
+message DeleteRivalReply{
     string message = 1;
     string retCode = 2;
 }
 
-message getRivalReply{
+message GetRivalReply{
     string rivalList = 1;
     string retCode = 2;
 }
 
-message getRivalScoreDBReply{
+message GetRivalScoreDBReply{
     binary rivalScoreDB = 1;//要做数据库构造，考虑用json?
     string retCode = 2;
 }
