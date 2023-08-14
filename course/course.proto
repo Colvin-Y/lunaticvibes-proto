@@ -8,8 +8,9 @@ import "validate/validate.proto";
 
 message CourseData{
     string courseHash = 1;
-    string courseSongHash = 2;
-    string courseKeys = 3;
+    string courseName = 2;
+    string courseSongHash = 3;
+    string courseKeys = 4;
 }
 
 service Course {
@@ -19,13 +20,28 @@ service Course {
         body: "*"
       };
     }
+    rpc GetCourseData (GetCourseDataRequest) returns (GetCourseDataReply){
+      option (google.api.http) = {
+        get: "/v1/course/get"
+      };
+    }
   }
 
 message InsertCourseDataRequest {
     CourseData data = 1;
+    string token = 2;
 }
   
 message InsertCourseDataReply {
     string message = 1;
-    string RETCODE = 2;
+    string retCode = 2;
+}
+message GetCourseDataRequest{
+    string courseHash = 1;//无需登录
+}
+
+message GetCourseDataReply{
+    CourseData data = 1;
+    string message = 2;
+    string retCode = 3;
 }

@@ -5,6 +5,7 @@ package song;
 option go_package=".;proto";
 import "google/api/annotations.proto";
 import "validate/validate.proto";
+import "../score/socre.proto";
 
 message SongData{
     string songHash = 1;
@@ -20,6 +21,21 @@ message SongData{
     string judgeRank = 11;
 }
 
+message GetSongRankData{
+  string songHash = 1;
+  string userUUID = 2;
+}
+
+message GetSongScoreData{
+  string songHash = 1;
+  string userUUID = 2;
+}
+
+message GetSongRankListData{
+  string songHash = 1;
+  string userUUID = 2;
+}
+
 service Song {
     rpc InsertSongData (InsertSongDataRequest) returns (InsertSongDataReply) {
       option (google.api.http) = {
@@ -27,13 +43,79 @@ service Song {
         body: "*"
       };
     }
+
+    rpc GetSongData (GetSongDataRequest) returns (GetSongDataReply) {
+      option (google.api.http) = {
+        get: "/v1/song/get_data"
+      };
+    }
+
+    rpc GetSongRank (GetSongRankRequest) returns (GetSongRankReply) { 
+      option (google.api.http) = {
+        get: "/v1/song/get_rank"
+      };
+    }
+
+    rpc GetSongScore (GetSongScoreRequest) returns (GetSongScoreReply){
+      option (google.api.http) = {
+        get: "/v1/song/get_score"
+      };
+    }
+
+    rpc GetSongRankList (GetSongRankListRequest) returns (GetSongRankListReply){
+      option (google.api.http) = {
+        get: "/v1/song/get_rank_list"
+      };
+    }
   }
 
 message InsertSongDataRequest {
     SongData data = 1;
+    string token = 1;
 }
   
 message InsertSongDataReply {
     string message = 1;
-    string RETCODE = 2;
+    string retCode = 2;
+}
+
+message GetSongDataRequest{
+  string songHash = 1;
+}
+
+message GetSongDataReply{
+  SongData data = 1;
+}
+
+message GetSongRankRequest{
+  GetSongRankData data = 1;
+  string token = 2;
+}
+message GetSongRankReply{
+  int32 userRank = 1;
+  int32 totalPlayer = 2;
+  string message = 3;
+  string retCode = 4;
+}
+
+message GetSongScoreRequest {
+  GetSongScoreData data = 1;
+  string token = 2;
+}
+
+message GetSongScoreReply{
+  ScoreData data = 1;
+  string message = 2;
+  string retCode = 3;
+}
+
+message GetSongRankListRequest{
+  GetSongRankListData data = 1;
+  string token = 2;
+}
+
+message GetSongRankListReply{
+  repeated ScoreData data = 1;
+  string message = 2;
+  string retCode = 3;
 }

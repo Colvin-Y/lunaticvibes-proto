@@ -8,29 +8,34 @@ import "validate/validate.proto";
 
 message SongAttachments{
     string songHash = 1;
-    string songURL = 2;
-    string songDiffURL = 3;
-    string songTag1 = 4;
-    string songTag2 = 5;
-    string songTag3 = 6;
-    string songTag4 = 7;
-    string songTag5 = 8;
-    string songTag6 = 9;
-    string songTag7 = 10;
-    string songTag8 = 11;
-    string songTag9 = 12;
-    string songTag10 = 13;
-    string songComment = 14;
-    string songExlevel = 15;
-    string userUUID = 16;
-    string updateTime = 17;
+    optional string songURL = 2;
+    optional string songDiffURL = 3;
+    optional string songTag1 = 4;
+    optional string songTag2 = 5;
+    optional string songTag3 = 6;
+    optional string songTag4 = 7;
+    optional string songTag5 = 8;
+    optional string songTag6 = 9;
+    optional string songTag7 = 10;
+    optional string songTag8 = 11;
+    optional string songTag9 = 12;
+    optional string songTag10 = 13;
+    optional string songComment = 14;
+    optional string songExlevel = 15;
+    string userUUID = 16;//信息编辑历史控制用
+    string updateTime = 17;//信息编辑历史控制用
 }
 
 service Song_attachments {
     rpc UpdateSongAttachments (UpdateSongAttachmentsRequest) returns (UpdateSongAttachmentsReply) {
       option (google.api.http) = {
-        patch: "/v1/song/update_attachments"
+        post: "/v1/song/update_attachments"
         body: "*"
+      };
+    }
+    rpc GetSongAttachments (GetSongAttachmentsRequest) returns (GetSongAttachmentsReply){
+      option (google.api.http) = {
+        get: "/v1/song/get_attachments"
       };
     }
   }
@@ -41,5 +46,15 @@ message UpdateSongAttachmentsRequest {
   
 message UpdateSongAttachmentsReply {
     string message = 1;
-    string RETCODE = 2;
+    string retCode = 2;
+}
+
+message GetSongAttachmentsRequest{
+    string songHash = 1;
+}
+
+message GetSongAttachmentsReply{
+    SongAttachments data = 1;
+    string message = 2;
+    string retCode = 3;
 }

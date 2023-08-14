@@ -18,6 +18,12 @@ message UserLoginData{
     string userPwd = 2;
 }
 
+enum UserStatus{
+    notLogged = 0;
+    Logged = 1;
+    Unknown = 2;
+}
+
 service User{
     rpc UserSignUp (UserSignUpRequest) returns (UserSignUpReply){
         option (google.api.http) = {
@@ -39,7 +45,7 @@ message UserSignUpRequest{
 
 message UserSignUpReply{
     string message = 1;
-    string RETCODE = 2;
+    string retCode = 2;
 }
 
 message UserLoginRequest{
@@ -48,6 +54,7 @@ message UserLoginRequest{
 
 message UserLoginReply{
     string userUUID = 1;
-    string message = 2;
-    string RETCODE = 3;
+    string token = 2;
+    string message = 3;
+    string retCode = 4;
 }

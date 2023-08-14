@@ -14,6 +14,40 @@ message UserAttachments{
     string userClass4 = 5;
     string userClass5 = 6;
     string userClass6 = 7;
-    string userProfile = 8;
+    optional string userProfile = 8;
     string userPrivacyLevel = 9;
+}
+
+service User {
+    rpc UserUpdateAttachments (UpdateAttachmentsRequest) returns (UpdateAttachmentsReply){
+        option (google.api.http) = {
+            post: "/v1/user/update_profile"
+            body: "*"
+        };
+        }
+    rpc UserGetAttachments (GetAttachmentsRequest) returns (GetAttachmentsReply){
+        option (google.api.http) = {
+            get: "/v1/user/get_profile"
+        };
+        }
+}
+
+message UpdateAttachmentsRequest{
+    UserAttachments data = 1;
+    string token = 2;
+}
+
+message UpdateAttachmentsReply{
+    string message = 1;
+    string retCode = 2;
+}
+
+message GetAttachmentsRequest{
+    string userUUID = 1;
+}
+
+message GetAttachmentsReply{
+    UserAttachments data = 1;
+    string message = 2;
+    string retCode = 3;
 }

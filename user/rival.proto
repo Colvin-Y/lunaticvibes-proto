@@ -20,7 +20,7 @@ message GetRivalData{
     string targetUserUUID = 1;
 }
 
-message GetRivalScoreData{
+message GetRivalScoreDBData{
     string userUUID = 1;
 }
 
@@ -44,7 +44,7 @@ service Rival{
           };
     }
 
-    rpc GetRivalScore (GetRivalScoreRequest) returns (GetRivalScoreReply){
+    rpc GetRivalScoreDB (GetRivalScoreDBRequest) returns (GetRivalScoreDBReply){
         option (google.api.http) = {
             get: "/v1/user/rival/get_score"
           };
@@ -53,36 +53,39 @@ service Rival{
 
 message AddRivalRequest{
     AddRivalData data = 1;
+    string token = 2;
 }
 
 message DeleteRivalRequest{
     DeleteRivalData data = 1;
+    string token = 2;
 }
 
 message GetRivalRequest{
     GetRivalData data = 1;
 }
 
-message GetRivalScoreRequest{
+message GetRivalScoreDBRequest{
     GetRivalScoreData data = 1;
+    string token = 2;
 }
 
 message AddRivalReply{
     string message = 1;
-    string RETCODE = 2;
+    string retCode = 2;
 }
 
 message DeleteRivalReply{
     string message = 1;
-    string RETCODE = 2;
+    string retCode = 2;
 }
 
 message GetRivalReply{
-    string RivalList = 1;
-    string RETCODE = 2;
+    string rivalList = 1;
+    string retCode = 2;
 }
 
-message GetRivalScoreReply{
-    string RivalScore = 1;//json
-    string RETCODE = 2;
+message GetRivalScoreDBReply{
+    binary rivalScoreDB = 1;//要做数据库构造，考虑用json?
+    string retCode = 2;
 }
