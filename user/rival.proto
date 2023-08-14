@@ -72,20 +72,20 @@ message GetRivalScoreDBRequest{
 
 message AddRivalReply{
     string message = 1;
-    string RETCODE = 2;
+    string retCode = 2;
 }
 
 message DeleteRivalReply{
     string message = 1;
-    string RETCODE = 2;
+    string retCode = 2;
 }
 
 message GetRivalReply{
-    string RivalList = 1;
-    string RETCODE = 2;
+    string rivalList = 1;
+    string retCode = 2;
 }
 
 message GetRivalScoreDBReply{
-    string RivalScoreDB = 1;//要做数据库构造，考虑用json?
-    string RETCODE = 2;
+    binary rivalScoreDB = 1;//要做数据库构造，考虑用json?
+    string retCode = 2;
 }

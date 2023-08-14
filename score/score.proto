@@ -33,9 +33,13 @@ message ScoreData {
   }
 
 message DeleteScoreData{
-  string SongHash = 1;
+  string songHash = 1;
   string userUUID = 2;
-}  
+}
+
+message GetScoreData{
+  string userUUID = 1;
+}
 
 service Score {
   rpc InsertScore (InsertScoreRequest) returns (InsertScoreReply) {
@@ -51,6 +55,12 @@ service Score {
       body: "*"
     };
   }
+
+  rpc GetScore (GetScoreRequest) returns (GetScoreReply){
+    option (google.api.http) = {
+      get: "/v1/score/get"
+    };//for raw scores，方便做进步展示图标之类的功能
+  }
 }
 
 message InsertScoreRequest {
@@ -60,7 +70,7 @@ message InsertScoreRequest {
 
 message InsertScoreReply {
   string message = 1;
-  string RETCODE = 2;
+  string retCode = 2;
 }
 
 message DeleteScoreRequest{
@@ -70,5 +80,14 @@ message DeleteScoreRequest{
 
 message DeleteScoreReply{
   string message = 1;
-  string RETCODE = 2;
+  string retCode = 2;
+}
+
+message GetScoreRequest{
+  GetScoreData data = 1;
+}
+
+message GetScoreReply{
+  string message = 1;
+  string retCode = 2;
 }

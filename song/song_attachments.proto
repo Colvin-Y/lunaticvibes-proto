@@ -46,7 +46,7 @@ message UpdateSongAttachmentsRequest {
   
 message UpdateSongAttachmentsReply {
     string message = 1;
-    string RETCODE = 2;
+    string retCode = 2;
 }
 
 message GetSongAttachmentsRequest{
@@ -56,5 +56,5 @@ message GetSongAttachmentsRequest{
 message GetSongAttachmentsReply{
     SongAttachments data = 1;
     string message = 2;
-    string RETCODE = 3;
+    string retCode = 3;
 }

@@ -28,7 +28,6 @@ service User {
     rpc UserGetAttachments (GetAttachmentsRequest) returns (GetAttachmentsReply){
         option (google.api.http) = {
             get: "/v1/user/get_profile"
-            body: "*"
         };
         }
 }
@@ -40,7 +39,7 @@ message UpdateAttachmentsRequest{
 
 message UpdateAttachmentsReply{
     string message = 1;
-    string RETCODE = 2;
+    string retCode = 2;
 }
 
 message GetAttachmentsRequest{
@@ -50,5 +49,5 @@ message GetAttachmentsRequest{
 message GetAttachmentsReply{
     UserAttachments data = 1;
     string message = 2;
-    string RETCODE = 3;
+    string retCode = 3;
 }

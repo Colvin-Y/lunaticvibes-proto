@@ -76,7 +76,7 @@ message InsertSongDataRequest {
   
 message InsertSongDataReply {
     string message = 1;
-    string RETCODE = 2;
+    string retCode = 2;
 }
 
 message GetSongDataRequest{
@@ -95,7 +95,7 @@ message GetSongRankReply{
   int32 userRank = 1;
   int32 totalPlayer = 2;
   string message = 3;
-  string RETCODE = 4;
+  string retCode = 4;
 }
 
 message GetSongScoreRequest {
@@ -106,7 +106,7 @@ message GetSongScoreRequest {
 message GetSongScoreReply{
   ScoreData data = 1;
   string message = 2;
-  string RETCODE = 3;
+  string retCode = 3;
 }
 
 message GetSongRankListRequest{
@@ -117,5 +117,5 @@ message GetSongRankListRequest{
 message GetSongRankListReply{
   repeated ScoreData data = 1;
   string message = 2;
-  string RETCODE = 3;
+  string retCode = 3;
 }

@@ -34,7 +34,7 @@ message InsertCourseDataRequest {
   
 message InsertCourseDataReply {
     string message = 1;
-    string RETCODE = 2;
+    string retCode = 2;
 }
 message GetCourseDataRequest{
     string courseHash = 1;//无需登录
@@ -43,5 +43,5 @@ message GetCourseDataRequest{
 message GetCourseDataReply{
     CourseData data = 1;
     string message = 2;
-    string RETCODE = 3;
+    string retCode = 3;
 }

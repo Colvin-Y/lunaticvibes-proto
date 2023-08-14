@@ -34,7 +34,7 @@ message UpdateCourseAttachmentsRequest{
 
 message UpdateCourseAttachmentsReply{
     string message = 1;
-    string RETCODE = 2;
+    string retCode = 2;
 }
 
 message GetCourseAttachmentsRequest{
@@ -43,6 +43,6 @@ message GetCourseAttachmentsRequest{
 
 message GetCourseAttachmentsReply{
     string message = 1;
-    string RETCODE = 2;
+    string retCode = 2;
 }
 
