@@ -6,20 +6,20 @@ option go_package=".;proto";
 import "google/api/annotations.proto";
 import "validate/validate.proto";
 
-message CourseAttachments{
+message courseAttachments{
     string courseHash = 1;
     string courseSymbol = 2;
     string courseTag = 3;
 }
 
 service Course{
-    rpc UpdateCourseAttachments (UpdateCourseAttachmentsRequest) returns (UpdateCourseAttachmentsReply) {
+    rpc UpdateCourseAttachments (updateCourseAttachmentsRequest) returns (updateCourseAttachmentsReply) {
         option (google.api.http) = {
           post: "/v1/course/update_attachments"
           body: "*"
     };
     }
-    rpc GetCourseAttachments (GetCourseAttachmentsRequest) returns (GetCourseAttachmentsReply) {
+    rpc GetCourseAttachments (getCourseAttachmentsRequest) returns (getCourseAttachmentsReply) {
         option (google.api.http) = {
           get: "/v1/course/get_attachments"
     };
@@ -27,22 +27,22 @@ service Course{
 }
 }
 
-message UpdateCourseAttachmentsRequest{
-    CourseAttachments data = 1;
+message updateCourseAttachmentsRequest{
+    courseAttachments data = 1;
     string token = 2;
 }
 
-message UpdateCourseAttachmentsReply{
+message updateCourseAttachmentsReply{
     string message = 1;
-    string RETCODE = 2;
+    string retCode = 2;
 }
 
-message GetCourseAttachmentsRequest{
+message getCourseAttachmentsRequest{
     CourseAttachments data = 1;//无需登录
 }
 
-message GetCourseAttachmentsReply{
+message getCourseAttachmentsReply{
     string message = 1;
-    string RETCODE = 2;
+    string retCode = 2;
 }
 

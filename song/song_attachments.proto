@@ -6,7 +6,7 @@ option go_package=".;proto";
 import "google/api/annotations.proto";
 import "validate/validate.proto";
 
-message SongAttachments{
+message songAttachments{
     string songHash = 1;
     optional string songURL = 2;
     optional string songDiffURL = 3;
@@ -27,34 +27,34 @@ message SongAttachments{
 }
 
 service Song_attachments {
-    rpc UpdateSongAttachments (UpdateSongAttachmentsRequest) returns (UpdateSongAttachmentsReply) {
+    rpc UpdateSongAttachments (updateSongAttachmentsRequest) returns (updateSongAttachmentsReply) {
       option (google.api.http) = {
         post: "/v1/song/update_attachments"
         body: "*"
       };
     }
-    rpc GetSongAttachments (GetSongAttachmentsRequest) returns (GetSongAttachmentsReply){
+    rpc GetSongAttachments (getSongAttachmentsRequest) returns (getSongAttachmentsReply){
       option (google.api.http) = {
         get: "/v1/song/get_attachments"
       };
     }
   }
 
-message UpdateSongAttachmentsRequest {
-    SongAttachments data = 1;
+message updateSongAttachmentsRequest {
+    songAttachments data = 1;
 }
   
-message UpdateSongAttachmentsReply {
+message updateSongAttachmentsReply {
     string message = 1;
-    string RETCODE = 2;
+    string retCode = 2;
 }
 
-message GetSongAttachmentsRequest{
+message getSongAttachmentsRequest{
     string songHash = 1;
 }
 
-message GetSongAttachmentsReply{
-    SongAttachments data = 1;
+message getSongAttachmentsReply{
+    songAttachments data = 1;
     string message = 2;
-    string RETCODE = 3;
+    string retCode = 3;
 }

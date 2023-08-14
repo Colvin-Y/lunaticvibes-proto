@@ -7,7 +7,7 @@ import "google/api/annotations.proto";
 import "validate/validate.proto";
 import "../score/socre.proto";
 
-message SongData{
+message songData{
     string songHash = 1;
     string songName = 2;
     string songArtist = 3;
@@ -21,101 +21,101 @@ message SongData{
     string judgeRank = 11;
 }
 
-message GetSongRankData{
+message getSongRankData{
   string songHash = 1;
   string userUUID = 2;
 }
 
-message GetSongScoreData{
+message getSongScoreData{
   string songHash = 1;
   string userUUID = 2;
 }
 
-message GetSongRankListData{
+message getSongRankListData{
   string songHash = 1;
   string userUUID = 2;
 }
 
 service Song {
-    rpc InsertSongData (InsertSongDataRequest) returns (InsertSongDataReply) {
+    rpc InsertSongData (insertSongDataRequest) returns (insertSongDataReply) {
       option (google.api.http) = {
         post: "/v1/song/insert"
         body: "*"
       };
     }
 
-    rpc GetSongData (GetSongDataRequest) returns (GetSongDataReply) {
+    rpc GetSongData (getSongDataRequest) returns (getSongDataReply) {
       option (google.api.http) = {
         get: "/v1/song/get_data"
       };
     }
 
-    rpc GetSongRank (GetSongRankRequest) returns (GetSongRankReply) { 
+    rpc GetSongRank (getSongRankRequest) returns (getSongRankReply) { 
       option (google.api.http) = {
         get: "/v1/song/get_rank"
       };
     }
 
-    rpc GetSongScore (GetSongScoreRequest) returns (GetSongScoreReply){
+    rpc GetSongScore (getSongScoreRequest) returns (getSongScoreReply){
       option (google.api.http) = {
         get: "/v1/song/get_score"
       };
     }
 
-    rpc GetSongRankList (GetSongRankListRequest) returns (GetSongRankListReply){
+    rpc GetSongRankList (getSongRankListRequest) returns (getSongRankListReply){
       option (google.api.http) = {
         get: "/v1/song/get_rank_list"
       };
     }
   }
 
-message InsertSongDataRequest {
-    SongData data = 1;
+message insertSongDataRequest {
+    songData data = 1;
     string token = 1;
 }
   
-message InsertSongDataReply {
+message insertSongDataReply {
     string message = 1;
-    string RETCODE = 2;
+    string retCode = 2;
 }
 
-message GetSongDataRequest{
+message getSongDataRequest{
   string songHash = 1;
 }
 
-message GetSongDataReply{
+message getSongDataReply{
   SongData data = 1;
 }
 
-message GetSongRankRequest{
+message getSongRankRequest{
   GetSongRankData data = 1;
   string token = 2;
 }
-message GetSongRankReply{
+message getSongRankReply{
   int32 userRank = 1;
   int32 totalPlayer = 2;
   string message = 3;
   string RETCODE = 4;
 }
 
-message GetSongScoreRequest {
-  GetSongScoreData data = 1;
+message getSongScoreRequest {
+  getSongScoreData data = 1;
   string token = 2;
 }
 
-message GetSongScoreReply{
-  ScoreData data = 1;
+message getSongScoreReply{
+  scoreData data = 1;
   string message = 2;
-  string RETCODE = 3;
+  string retCode = 3;
 }
 
-message GetSongRankListRequest{
-  GetSongRankListData data = 1;
+message getSongRankListRequest{
+  getSongRankListData data = 1;
   string token = 2;
 }
 
-message GetSongRankListReply{
-  repeated ScoreData data = 1;
+message getSongRankListReply{
+  repeated scoreData data = 1;
   string message = 2;
-  string RETCODE = 3;
+  string retCode = 3;
 }

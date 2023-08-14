@@ -6,7 +6,7 @@ option go_package=".;proto";
 import "google/api/annotations.proto";
 import "validate/validate.proto";
 
-message CourseData{
+message courseData{
     string courseHash = 1;
     string courseName = 2;
     string courseSongHash = 3;
@@ -14,34 +14,34 @@ message CourseData{
 }
 
 service Course {
-    rpc InsertCourseData (InsertCourseDataRequest) returns (InsertCourseDataReply) {
+    rpc InsertCourseData (insertCourseDataRequest) returns (insertCourseDataReply) {
       option (google.api.http) = {
         post: "/v1/course/insert"
         body: "*"
       };
     }
-    rpc GetCourseData (GetCourseDataRequest) returns (GetCourseDataReply){
+    rpc GetCourseData (getCourseDataRequest) returns (getCourseDataReply){
       option (google.api.http) = {
         get: "/v1/course/get"
       };
     }
   }
 
-message InsertCourseDataRequest {
-    CourseData data = 1;
+message insertCourseDataRequest {
+    courseData data = 1;
     string token = 2;
 }
   
-message InsertCourseDataReply {
+message insertCourseDataReply {
     string message = 1;
-    string RETCODE = 2;
+    string retCode = 2;
 }
-message GetCourseDataRequest{
+message getCourseDataRequest{
     string courseHash = 1;//无需登录
 }
 
-message GetCourseDataReply{
-    CourseData data = 1;
+message getCourseDataReply{
+    courseData data = 1;
     string message = 2;
-    string RETCODE = 3;
+    string retCode = 3;
 }

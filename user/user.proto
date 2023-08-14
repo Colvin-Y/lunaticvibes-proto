@@ -6,26 +6,32 @@ option go_package=".;proto";
 import "google/api/annotations.proto";
 import "validate/validate.proto";
 
-message UserSignUpData{
+message userSignUpData{
     string userName = 1;
     string userNickname = 2;
     string userEmail = 3;
     string userPwd = 4;
 }
 
-message UserLoginData{
+message userLoginData{
     string userName = 1;
     string userPwd = 2;
 }
 
+enum userStatus{
+    notLogged = 0;
+    Logged = 1;
+    Unknown = 2;
+}
+
 service User{
-    rpc UserSignUp (UserSignUpRequest) returns (UserSignUpReply){
+    rpc UserSignUp (userSignUpRequest) returns (userSignUpReply){
         option (google.api.http) = {
             post: "/v1/user/signup"
             body: "*"
           };
     }
-    rpc UserLogin (UserLoginRequest) returns (UserLoginReply){
+    rpc UserLogin (userLoginRequest) returns (userLoginReply){
         option (google.api.http) = {
             post: "/v1/user/login"
             body: "*"
@@ -33,21 +39,22 @@ service User{
     }
 }
 
-message UserSignUpRequest{
-    UserSignUpData data = 1;
+message userSignUpRequest{
+    userSignUpData data = 1;
 }
 
-message UserSignUpReply{
+message userSignUpReply{
     string message = 1;
-    string RETCODE = 2;
+    string retCode = 2;
 }
 
-message UserLoginRequest{
-    UserLoginData data = 1;
+message userLoginRequest{
+    userLoginData data = 1;
 }
 
-message UserLoginReply{
+message userLoginReply{
     string userUUID = 1;
-    string message = 2;
-    string RETCODE = 3;
+    string token = 2;
+    string message = 3;
+    string retCode = 4;
 }

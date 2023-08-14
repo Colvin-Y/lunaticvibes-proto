@@ -6,23 +6,23 @@ option go_package=".;proto";
 import "google/api/annotations.proto";
 import "validate/validate.proto";
 
-message GetChallengerData{
+message getChallengerData{
     string targetUserUUID = 1;
 }
 
 service Challenger{
-    rpc GetChallenger (GetChallengerRequest) returns (GetChallengerReply){
+    rpc GetChallenger (getChallengerRequest) returns (getChallengerReply){
             option (google.api.http) = {
                 get: "/v1/user/challenger/get"
               };
     }
 }
 
-message GetChallengerRequest{
-    GetChallengerData data = 1;
+message getChallengerRequest{
+    getChallengerData data = 1;
 }
 
-message GetChallengerReply{
+message getChallengerReply{
     string challengerList = 1;
-    string RETCODE = 2;
+    string retCode = 2;
 }

@@ -6,7 +6,7 @@ option go_package=".;proto";
 import "google/api/annotations.proto";
 import "validate/validate.proto";
 
-message UserAttachments{
+message userAttachments{
     string userUUID = 1;
     string userClass1 = 2;
     string userClass2 = 3;
@@ -19,36 +19,35 @@ message UserAttachments{
 }
 
 service User {
-    rpc UserUpdateAttachments (UpdateAttachmentsRequest) returns (UpdateAttachmentsReply){
+    rpc UserUpdateAttachments (updateAttachmentsRequest) returns (updateAttachmentsReply){
         option (google.api.http) = {
             post: "/v1/user/update_profile"
             body: "*"
         };
         }
-    rpc UserGetAttachments (GetAttachmentsRequest) returns (GetAttachmentsReply){
+    rpc UserGetAttachments (getAttachmentsRequest) returns (getAttachmentsReply){
         option (google.api.http) = {
             get: "/v1/user/get_profile"
-            body: "*"
         };
         }
 }
 
-message UpdateAttachmentsRequest{
-    UserAttachments data = 1;
+message updateAttachmentsRequest{
+    userAttachments data = 1;
     string token = 2;
 }
 
-message UpdateAttachmentsReply{
+message updateAttachmentsReply{
     string message = 1;
-    string RETCODE = 2;
+    string retCode = 2;
 }
 
-message GetAttachmentsRequest{
+message getAttachmentsRequest{
     string userUUID = 1;
 }
 
-message GetAttachmentsReply{
+message getAttachmentsReply{
     UserAttachments data = 1;
     string message = 2;
-    string RETCODE = 3;
+    string retCode = 3;
 }

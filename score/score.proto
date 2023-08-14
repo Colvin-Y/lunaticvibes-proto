@@ -6,7 +6,7 @@ option go_package=".;proto";
 import "google/api/annotations.proto";
 import "validate/validate.proto";
 
-message ScoreData {
+message scoreData {
     string userUUID = 1;
     string isCourse = 2;
     string songHash = 3;
@@ -32,43 +32,62 @@ message ScoreData {
     string clientVersion = 23;
   }
 
-message DeleteScoreData{
-  string SongHash = 1;
+message deleteScoreData{
+  string songHash = 1;
   string userUUID = 2;
-}  
+}
+
+message getScoreData{
+  string userUUID = 1;
+}
 
 service Score {
-  rpc InsertScore (InsertScoreRequest) returns (InsertScoreReply) {
+  rpc InsertScore (insertScoreRequest) returns (insertScoreReply) {
     option (google.api.http) = {
       post: "/v1/score/insert"
       body: "*"
     };
   }
 
-  rpc DeleteScore (DeleteScoreRequest) returns (DeleteScoreReply){
+  rpc DeleteScore (deleteScoreRequest) returns (deleteScoreReply){
     option (google.api.http) = {
       post: "/v1/score/delete"
       body: "*"
     };
   }
+
+  rpc GetScore (getScoreRequest) returns (getScoreReply){
+    option (google.api.http) = {
+      get: "/v1/score/get"
+    };//for raw scores，方便做进步展示图标之类的功能
+  }
 }
 
-message InsertScoreRequest {
-  ScoreData data = 1;
+message insertScoreRequest {
+  scoreData data = 1;
   string token = 1;
 }
 
-message InsertScoreReply {
+message insertScoreReply {
   string message = 1;
-  string RETCODE = 2;
+  string retCode = 2;
 }
 
-message DeleteScoreRequest{
+message deleteScoreRequest{
   DeleteScoreData data = 1;
   string token = 2;
 }
 
-message DeleteScoreReply{
+message deleteScoreReply{
   string message = 1;
-  string RETCODE = 2;
+  string retCode = 2;
+}
+
+message getScoreRequest{
+  getScoreData data = 1;
+}
+
+message getScoreReply{
+  string message = 1;
+  string retCode = 2;
 }
