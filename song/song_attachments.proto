@@ -22,21 +22,20 @@ message SongAttachments{
     optional string songTag10 = 13;
     optional string songComment = 14;
     optional string songExlevel = 15;
-    string userUUID = 16;
-    string updateTime = 17;
+    string userUUID = 16;//信息编辑历史控制用
+    string updateTime = 17;//信息编辑历史控制用
 }
 
 service Song_attachments {
     rpc UpdateSongAttachments (UpdateSongAttachmentsRequest) returns (UpdateSongAttachmentsReply) {
       option (google.api.http) = {
-        patch: "/v1/song/update_attachments"
+        post: "/v1/song/update_attachments"
         body: "*"
       };
     }
     rpc GetSongAttachments (GetSongAttachmentsRequest) returns (GetSongAttachmentsReply){
       option (google.api.http) = {
-        patch: "/v1/song/get_attachments"
-        body: "*"
+        get: "/v1/song/get_attachments"
       };
     }
   }

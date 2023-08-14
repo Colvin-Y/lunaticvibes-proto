@@ -21,26 +21,28 @@ service Course{
     }
     rpc GetCourseAttachments (GetCourseAttachmentsRequest) returns (GetCourseAttachmentsReply) {
         option (google.api.http) = {
-          post: "/v1/course/get_attachments"
-          body: "*"
+          get: "/v1/course/get_attachments"
     };
 
 }
 }
 
 message UpdateCourseAttachmentsRequest{
-    
+    CourseAttachments data = 1;
+    string token = 2;
 }
 
 message UpdateCourseAttachmentsReply{
-
+    string message = 1;
+    string RETCODE = 2;
 }
 
 message GetCourseAttachmentsRequest{
-
+    CourseAttachments data = 1;//无需登录
 }
 
 message GetCourseAttachmentsReply{
-
+    string message = 1;
+    string RETCODE = 2;
 }
 

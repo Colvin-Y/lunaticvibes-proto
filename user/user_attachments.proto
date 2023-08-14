@@ -19,13 +19,13 @@ message UserAttachments{
 }
 
 service User {
-    rpc UserUpdateAttachments (UserUpdateAttachmentsRequest) returns (UserUpdateAttachmentsReply){
+    rpc UserUpdateAttachments (UpdateAttachmentsRequest) returns (UpdateAttachmentsReply){
         option (google.api.http) = {
             post: "/v1/user/update_profile"
             body: "*"
         };
         }
-    rpc UserGetAttachments (UserGetAttachmentsRequest) returns (UserGetAttachmentsReply){
+    rpc UserGetAttachments (GetAttachmentsRequest) returns (GetAttachmentsReply){
         option (google.api.http) = {
             get: "/v1/user/get_profile"
             body: "*"
@@ -33,20 +33,21 @@ service User {
         }
 }
 
-message UserUpdateAttachmentsRequest{
+message UpdateAttachmentsRequest{
     UserAttachments data = 1;
+    string token = 2;
 }
 
-message UserUpdateAttachmentsReply{
+message UpdateAttachmentsReply{
     string message = 1;
     string RETCODE = 2;
 }
 
-message UserGetAttachmentsRequest{
+message GetAttachmentsRequest{
     string userUUID = 1;
 }
 
-message UserGetAttachmentsReply{
+message GetAttachmentsReply{
     UserAttachments data = 1;
     string message = 2;
     string RETCODE = 3;

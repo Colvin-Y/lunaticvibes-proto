@@ -32,6 +32,11 @@ message ScoreData {
     string clientVersion = 23;
   }
 
+message DeleteScoreData{
+  string SongHash = 1;
+  string userUUID = 2;
+}  
+
 service Score {
   rpc InsertScore (InsertScoreRequest) returns (InsertScoreReply) {
     option (google.api.http) = {
@@ -50,6 +55,7 @@ service Score {
 
 message InsertScoreRequest {
   ScoreData data = 1;
+  string token = 1;
 }
 
 message InsertScoreReply {
@@ -58,8 +64,8 @@ message InsertScoreReply {
 }
 
 message DeleteScoreRequest{
-  string SongHash = 1;
-  string userUUID = 2;
+  DeleteScoreData data = 1;
+  string token = 2;
 }
 
 message DeleteScoreReply{

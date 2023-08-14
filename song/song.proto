@@ -21,6 +21,21 @@ message SongData{
     string judgeRank = 11;
 }
 
+message GetSongRankData{
+  string songHash = 1;
+  string userUUID = 2;
+}
+
+message GetSongScoreData{
+  string songHash = 1;
+  string userUUID = 2;
+}
+
+message GetSongRankListData{
+  string songHash = 1;
+  string userUUID = 2;
+}
+
 service Song {
     rpc InsertSongData (InsertSongDataRequest) returns (InsertSongDataReply) {
       option (google.api.http) = {
@@ -32,34 +47,31 @@ service Song {
     rpc GetSongData (GetSongDataRequest) returns (GetSongDataReply) {
       option (google.api.http) = {
         get: "/v1/song/get_data"
-        body: "*"
       };
     }
 
-    rpc GetSongRankClient (GetSongRankClientRequest) returns (GetSongRankClientReply) { 
+    rpc GetSongRank (GetSongRankRequest) returns (GetSongRankReply) { 
       option (google.api.http) = {
-        get: "/v1/song/get_rank_client"
-        body: "*"
+        get: "/v1/song/get_rank"
       };
     }
 
-    rpc GetSongScoreData (GetSongScoreDataRequest) returns (GetSongScoreDataReply){
+    rpc GetSongScore (GetSongScoreRequest) returns (GetSongScoreReply){
       option (google.api.http) = {
         get: "/v1/song/get_score"
-        body: "*"
       };
     }
 
     rpc GetSongRankList (GetSongRankListRequest) returns (GetSongRankListReply){
       option (google.api.http) = {
         get: "/v1/song/get_rank_list"
-        body: "*"
       };
     }
   }
 
 message InsertSongDataRequest {
     SongData data = 1;
+    string token = 1;
 }
   
 message InsertSongDataReply {
@@ -69,31 +81,41 @@ message InsertSongDataReply {
 
 message GetSongDataRequest{
   string songHash = 1;
-  optional string userUUID = 2;
 }
 
 message GetSongDataReply{
   SongData data = 1;
 }
 
-message GetSongRankClient{
-  string songHash = 1;
-  string userUUID = 2;
+message GetSongRankRequest{
+  GetSongRankData data = 1;
+  string token = 2;
 }
-message GetSongRankClientReply{
+message GetSongRankReply{
   int32 userRank = 1;
+  int32 totalPlayer = 2;
+  string message = 3;
+  string RETCODE = 4;
+}
+
+message GetSongScoreRequest {
+  GetSongScoreData data = 1;
+  string token = 2;
+}
+
+message GetSongScoreReply{
+  ScoreData data = 1;
   string message = 2;
   string RETCODE = 3;
 }
 
-message GetSongScoreDataRequest {
-  string SongHash = 1;
-  string userUUID = 2;
+message GetSongRankListRequest{
+  GetSongRankListData data = 1;
+  string token = 2;
 }
 
-message GetSongScoreDataReply{
-  int32 totalPlayer = 1;
-  repeated ScoreData data = 2;
+message GetSongRankListReply{
+  repeated ScoreData data = 1;
   string message = 2;
   string RETCODE = 3;
 }
