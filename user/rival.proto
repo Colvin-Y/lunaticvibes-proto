@@ -66,7 +66,7 @@ message GetRivalRequest{
 }
 
 message GetRivalScoreDBRequest{
-    GetRivalScoreData data = 1;
+    GetRivalScoreDBData data = 1;
     string token = 2;
 }
 
@@ -86,6 +86,6 @@ message GetRivalReply{
 }
 
 message GetRivalScoreDBReply{
-    binary rivalScoreDB = 1;//要做数据库构造，考虑用json?
+    bytes rivalScoreDB = 1;//要做数据库构造，考虑用json?
     string retCode = 2;
 }

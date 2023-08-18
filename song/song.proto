@@ -5,7 +5,7 @@ package song;
 option go_package=".;proto";
 import "google/api/annotations.proto";
 import "validate/validate.proto";
-import "../score/socre.proto";
+import "score/score.proto";
 
 message SongData{
     string songHash = 1;
@@ -71,7 +71,7 @@ service Song {
 
 message InsertSongDataRequest {
     SongData data = 1;
-    string token = 1;
+    string token = 2;
 }
   
 message InsertSongDataReply {
@@ -104,7 +104,7 @@ message GetSongScoreRequest {
 }
 
 message GetSongScoreReply{
-  ScoreData data = 1;
+  score.ScoreData data = 1;
   string message = 2;
   string retCode = 3;
 }
@@ -115,7 +115,7 @@ message GetSongRankListRequest{
 }
 
 message GetSongRankListReply{
-  repeated ScoreData data = 1;
+  repeated score.ScoreData data = 1;
   string message = 2;
   string retCode = 3;
 }
